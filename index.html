@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="ALUMARIAH REALTORS — Your Property. Your Future. Our Expertise."
+    >
+
+    <title>ALUMARIAH REALTORS | Premium Real Estate</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+  
+    <a href="index.html" class="brand-logo">
+        <img src="ASSETS/alumariah-logo.png" alt="ALUMARIAH REALTORS">
+
+    </a>
+
+    <nav class="desktop-nav">
+
+        <a href="#home" class="active">Home</a>
+        <a href="#properties">Properties</a>
+        <a href="#services">Services</a>
+        <a href="#areas">Areas</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <a
+            href="https://wa.me/254756112632"
+            target="_blank"
+            class="header-whatsapp"
+        >
+            WhatsApp Us
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open Menu"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- MOBILE NAVIGATION -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <button class="mobile-close" id="mobileClose">×</button>
+
+    <a href="#home">Home</a>
+    <a href="#properties">Properties</a>
+    <a href="#services">Services</a>
+    <a href="#areas">Areas</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+
+    <button
+        class="mobile-admin-button"
+        onclick="openAdminPanel()"
+    >
+        Admin / Manage Properties
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main>
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            <span></span>
+            WELCOME TO ALUMARIAH REALTORS
+        </div>
+
+        <h1>
+            Find Your
+            <br>
+            Perfect <span>Place.</span>
+            <br>
+            Build Your
+            <br>
+            <strong>Future.</strong>
+        </h1>
+
+        <p>
+            Whether you are buying, selling, renting, leasing or looking
+            for professional property management solutions, we connect
+            you with the right property across Kenya.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#properties" class="button button-primary">
+                Explore Properties
+                <span>→</span>
+            </a>
+
+            <a href="#contact" class="button button-outline">
+                List Your Property
+            </a>
+
+        </div>
+
+        <div class="hero-trust">
+
+            <div>
+                <strong>01</strong>
+                <span>Trusted Service</span>
+            </div>
+
+            <div>
+                <strong>02</strong>
+                <span>Premium Properties</span>
+            </div>
+
+            <div>
+                <strong>03</strong>
+                <span>Expert Guidance</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <!--
+            This is the premium hero building image.
+
+            You can later replace the URL with:
+            ASSETS/hero-industrial.jpg
+        -->
+
+        <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=90"
+            alt="Modern premium commercial building"
+        >
+
+        <div class="hero-image-overlay"></div>
+
+        <div class="hero-image-card">
+
+            <span>PROPERTY EXPERTS</span>
+
+            <strong>
+                Your next
+                <br>
+                opportunity starts here.
+            </strong>
+
+            <a href="#properties">
+                Discover More →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SEARCH
+========================================================= -->
+
+<section class="search-section">
+
+    <div class="search-heading">
+
+        <span>FIND YOUR PROPERTY</span>
+
+        <h2>
+            What are you
+            <em>looking for?</em>
+        </h2>
+
+    </div>
+
+    <div class="search-box">
+
+        <div class="search-tabs">
+
+            <button class="search-tab active" data-mode="all">
+                All
+            </button>
+
+            <button class="search-tab" data-mode="sale">
+                For Sale
+            </button>
+
+            <button class="search-tab" data-mode="rent">
+                For Rent
+            </button>
+
+            <button class="search-tab" data-mode="lease">
+                For Lease
+            </button>
+
+            <button class="search-tab" data-mode="commercial">
+                Commercial
+            </button>
+
+        </div>
+
+        <div class="search-fields">
+
+            <div class="field">
+
+                <label>Location</label>
+
+                <select id="searchLocation">
+
+                    <option value="">All Locations</option>
+
+                    <option>Nairobi</option>
+                    <option>Mombasa</option>
+                    <option>Malindi</option>
+                    <option>Kilifi</option>
+                    <option>Lamu</option>
+                    <option>Loitoktok</option>
+                    <option>Machakos</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Property Type</label>
+
+                <select id="searchType">
+
+                    <option value="">All Types</option>
+
+                    <option>Residential</option>
+                    <option>Apartment</option>
+                    <option>Commercial</option>
+                    <option>Land</option>
+                    <option>Office</option>
+                    <option>Warehouse</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Minimum Price</label>
+
+                <input
+                    type="number"
+                    id="searchMinPrice"
+                    placeholder="KSh 0"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Maximum Price</label>
+
+                <input
+                    type="number"
+                    id="searchMaxPrice"
+                    placeholder="No limit"
+                >
+
+            </div>
+
+
+            <button
+                class="search-button"
+                onclick="runSearch()"
+            >
+                Search Properties
+                <span>→</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROPERTIES
+========================================================= -->
+
+<section class="properties-section" id="properties">
+
+    <div class="section-top">
+
+        <div>
+
+            <div class="section-label">
+                OUR COLLECTION
+            </div>
+
+            <h2>
+                Featured
+                <span>Properties</span>
+            </h2>
+
+            <p>
+                Explore properties selected and managed by
+                ALUMARIAH REALTORS.
+            </p>
+
+        </div>
+
+        <button
+            class="admin-button"
+            onclick="openAdminPanel()"
+        >
+            <span>＋</span>
+            Manage Properties
+        </button>
+
+    </div>
+
+
+    <!-- PROPERTY GRID -->
+
+    <div
+        class="property-grid"
+        id="propertyGrid"
+    ></div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+        class="empty-properties"
+        id="emptyProperties"
+    >
+
+        <div class="empty-icon">
+            ✦
+        </div>
+
+        <h3>
+            Your property collection starts here.
+        </h3>
+
+        <p>
+            No properties have been added yet.
+            Admin can upload properties, photos and
+            complete details using the Property Manager.
+        </p>
+
+        <button
+            class="button button-primary"
+            onclick="openAdminPanel()"
+        >
+            Add Your First Property
+            <span>→</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="services-section" id="services">
+
+    <div class="section-intro">
+
+        <div class="section-label">
+            WHAT WE DO
+        </div>
+
+        <h2>
+            Real Estate
+            <span>Without The Stress.</span>
+        </h2>
+
+        <p>
+            Professional property solutions designed around
+            your goals, investment and future.
+        </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+        <article class="service-card">
+
+            <div class="service-number">01</div>
+
+            <div class="service-icon">⌂</div>
+
+            <h3>Buying & Selling</h3>
+
+            <p>
+                We help clients buy and sell properties
+                with confidence and professional guidance.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+
+        <article class="service-card">
+
+            <div class="service-number">02</div>
+
+            <div class="service-icon">▣</div>
+
+            <h3>Rentals & Leasing</h3>
+
+            <p>
+                Find quality rental and leasing opportunities
+                that match your needs and budget.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+
+        <article class="service-card">
+
+            <div class="service-number">03</div>
+
+            <div class="service-icon">▥</div>
+
+            <h3>Commercial Properties</h3>
+
+            <p>
+                Offices, shops, warehouses and commercial
+                spaces for your next business opportunity.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+
+        <article class="service-card">
+
+            <div class="service-number">04</div>
+
+            <div class="service-icon">◇</div>
+
+            <h3>Property Management</h3>
+
+            <p>
+                Professional property management solutions
+                designed to protect and grow your investment.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+
+        <article class="service-card">
+
+            <div class="service-number">05</div>
+
+            <div class="service-icon">◆</div>
+
+            <h3>Valuation & Advisory</h3>
+
+            <p>
+                Make informed property decisions with
+                professional valuation and advisory support.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+
+        <article class="service-card">
+
+            <div class="service-number">06</div>
+
+            <div class="service-icon">✦</div>
+
+            <h3>Property Consultancy</h3>
+
+            <p>
+                Expert guidance for investors, landlords,
+                buyers and property owners.
+            </p>
+
+            <a href="#contact">
+                Learn More →
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     AREAS WE SERVE
+========================= -->
+<section class="areas-section" id="areas">
+
+    <div class="areas-intro">
+        <span class="section-label">AREAS WE SERVE</span>
+
+        <h2>
+            We Are <span>Across Kenya.</span>
+        </h2>
+
+        <p>
+            We connect clients with exceptional property opportunities
+            across some of Kenya's most promising locations.
+        </p>
+
+        <a href="#contact" class="pink-btn">
+            Explore Areas →
+        </a>
+    </div>
+
+
+    <div class="areas-grid">
+
+        <!-- NAIROBI -->
+        <a href="#properties"
+           class="area-card area-nairobi">
+
+            <div class="area-overlay"></div>
+
+            <div class="area-content">
+                <small>Capital City</small>
+                <h3>NAIROBI</h3>
+                <span>Explore Properties →</span>
+            </div>
+
+        </a>
+
+
+        <!-- MOMBASA -->
+        <a href="#properties"
+           class="area-card area-mombasa">
+
+            <div class="area-overlay"></div>
+
+            <div class="area-content">
+                <small>Coast</small>
+                <h3>MOMBASA</h3>
+                <span>Explore Properties →</span>
+            </div>
+
+        </a>
+
+
+        <!-- MALINDI -->
+        <a href="#properties"
+           class="area-card area-malindi">
+
+            <div class="area-overlay"></div>
+
+            <div class="area-content">
+                <small>Coast</small>
+                <h3>MALINDI</h3>
+                <span>Explore Properties →</span>
+            </div>
+
+        </a>
+
+
+        <!-- KILIFI -->
+        <a href="#properties"
+           class="area-card area-kilifi">
+
+            <div class="area-overlay"></div>
+
+            <div class="area-content">
+                <small>Coast</small>
+                <h3>KILIFI</h3>
+                <span>Explore Properties →</span>
+            </div>
+
+        </a>
+
+
+        <!-- LAMU -->
+        <a href="#properties"
+           class="area-card area-lamu">
+
+            <div class="area-overlay"></div>
+
+            <div class="area-content">
+                <small>Coast</small>
+                <h3>LAMU</h3>
+                <span>Explore Properties →</span>
+            </div>
+
+        </a>
+
+
+    </div>
+
+</section>
+<!-- =========================================================
+     WHY US
+========================================================= -->
+
+<section class="why-section" id="about">
+
+    <div class="why-visual">
+
+        <div class="visual-box">
+
+            <span>ALUMARIAH</span>
+
+            <strong>
+                Property.
+                <br>
+                Purpose.
+                <br>
+                Progress.
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="why-copy">
+
+        <div class="section-label">
+            WHY ALUMARIAH REALTORS
+        </div>
+
+        <h2>
+            Your Property.
+            <br>
+            Your Future.
+            <br>
+            <span>Our Expertise.</span>
+        </h2>
+
+        <p>
+            We believe property is more than bricks and buildings.
+            It is about creating security, opportunity and a better
+            future for individuals, families and businesses.
+        </p>
+
+
+        <div class="values">
+
+            <div class="value">
+
+                <div class="value-check">✓</div>
+
+                <div>
+                    <strong>Trust</strong>
+                    <p>
+                        Transparent and client-focused service.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-check">✓</div>
+
+                <div>
+                    <strong>Integrity</strong>
+                    <p>
+                        Professional and responsible guidance.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-check">✓</div>
+
+                <div>
+                    <strong>Professionalism</strong>
+                    <p>
+                        Expertise from search to completion.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-check">✓</div>
+
+                <div>
+                    <strong>Results</strong>
+                    <p>
+                        Focused on the right property outcome.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats-section">
+
+    <div class="stats-heading">
+
+        <span>THE ALUMARIAH STANDARD</span>
+
+        <h2>
+            Built Around
+            <em>Results.</em>
+        </h2>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+        <div>
+            <strong>100%</strong>
+            <span>Client Focus</span>
+        </div>
+
+        <div>
+            <strong>24/7</strong>
+            <span>Customer Support</span>
+        </div>
+
+        <div>
+            <strong>07+</strong>
+            <span>Key Areas</span>
+        </div>
+
+        <div>
+            <strong>∞</strong>
+            <span>Opportunities</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ADMIN CTA
+========================================================= -->
+
+<section class="admin-section">
+
+    <div class="admin-copy">
+
+        <div class="section-label">
+            ADMIN / AGENT PORTAL
+        </div>
+
+        <h2>
+            Have a new property?
+            <span>Add it yourself.</span>
+        </h2>
+
+        <p>
+            Upload property images, pricing and important details
+            directly through the website's Property Manager.
+        </p>
+
+        <button
+            class="button button-primary"
+            onclick="openAdminPanel()"
+        >
+            ＋ Add New Property
+        </button>
+
+        <div class="admin-features">
+
+            <div>
+                <strong>01</strong>
+                <span>Upload Multiple Photos</span>
+            </div>
+
+            <div>
+                <strong>02</strong>
+                <span>Add Property Details</span>
+            </div>
+
+            <div>
+                <strong>03</strong>
+                <span>Edit or Delete Listings</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-preview">
+
+        <div class="admin-window">
+
+            <div class="window-top">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+            <div class="window-content">
+
+                <div class="fake-label">
+                    PROPERTY MANAGER
+                </div>
+
+                <h3>
+                    Add New Property
+                </h3>
+
+                <div class="fake-fields">
+
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="wide"></div>
+
+                </div>
+
+                <div class="fake-upload">
+                    📷 Upload Property Photos
+                </div>
+
+                <div class="fake-button">
+                    Save Property
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section class="contact-section" id="contact">
+
+    <div class="contact-copy">
+
+        <div class="section-label">
+            GET IN TOUCH
+        </div>
+
+        <h2>
+            Let's find the
+            <span>right property</span>
+            for you.
+        </h2>
+
+        <p>
+            Tell us what you need and our team will help
+            you explore the right property solutions.
+        </p>
+
+
+        <div class="contact-details">
+
+            <div>
+
+                <span>☎</span>
+
+                <div>
+                    <small>CALL US</small>
+
+                    <strong>
+                        0721 557 592
+                        <br>
+                        0756 112 632
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span>✉</span>
+
+                <div>
+                    <small>EMAIL</small>
+
+                    <strong>
+                        alumariah22@gmail.com
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span>◉</span>
+
+                <div>
+                    <small>WHATSAPP</small>
+
+                    <strong>
+                        +254 756 112 632
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <form class="contact-form" id="contactForm">
+
+        <div class="form-two">
+
+            <input
+                type="text"
+                id="contactName"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="tel"
+                id="contactPhone"
+                placeholder="Phone Number"
+                required
+            >
+
+        </div>
+
+
+        <input
+            type="email"
+            id="contactEmail"
+            placeholder="Email Address"
+        >
+
+
+        <select id="contactNeed">
+
+            <option value="">
+                What can we help you with?
+            </option>
+
+            <option>Buying Property</option>
+            <option>Selling Property</option>
+            <option>Renting Property</option>
+            <option>Leasing Property</option>
+            <option>Commercial Property</option>
+            <option>Property Management</option>
+            <option>Listing My Property</option>
+
+        </select>
+
+
+        <textarea
+            id="contactMessage"
+            rows="5"
+            placeholder="Tell us what you are looking for..."
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="button button-primary"
+        >
+            Send Inquiry →
+        </button>
+
+        <small id="contactStatus"></small>
+
+    </form>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-brand">
+
+        <a href="index.html" class="footer-logo">
+            <img 
+                src="ASSETS/alumariah-logo.png" 
+                alt="ALUMARIAH REALTORS COMPANY LTD"
+            >
+        </a>
+    
+        <p class="footer-tagline">
+            Your Property. Your Future. Our Expertise.
+        </p>
+    
+    </div>
+
+        <div class="footer-column">
+
+            <h4>QUICK LINKS</h4>
+
+            <a href="#home">Home</a>
+            <a href="#properties">Properties</a>
+            <a href="#services">Services</a>
+            <a href="#areas">Areas</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>COMPANY</h4>
+
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact">List Property</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>CONTACT</h4>
+
+            <p>0721 557 592</p>
+            <p>0756 112 632</p>
+            <p>alumariah22@gmail.com</p>
+
+            <a
+                href="https://wa.me/254756112632"
+                target="_blank"
+                class="footer-whatsapp"
+            >
+                WhatsApp Us
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 ALUMARIAH REALTORS. All Rights Reserved.
+        </span>
+
+        <span>
+            TRUST • INTEGRITY • PROFESSIONALISM • RESULTS
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================================
+     ADMIN PROPERTY MODAL
+========================================================= -->
+
+<div class="modal" id="adminModal">
+
+    <div class="admin-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeAdminPanel()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-header">
+
+            <div class="section-label">
+                ADMIN / AGENT
+            </div>
+
+            <h2>
+                Property
+                <span>Manager</span>
+            </h2>
+
+            <p>
+                Add and manage properties displayed on your website.
+            </p>
+
+        </div>
+
+
+        <div class="admin-tabs">
+
+            <button
+                class="admin-tab active"
+                id="addTab"
+                onclick="showAddProperty()"
+            >
+                Add Property
+            </button>
+
+            <button
+                class="admin-tab"
+                id="manageTab"
+                onclick="showManageProperties()"
+            >
+                Manage Listings
+            </button>
+
+        </div>
+
+
+        <!-- ADD PROPERTY -->
+
+        <div id="addPropertyArea">
+
+            <form id="propertyForm">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Property Title *</label>
+
+                        <input
+                            type="text"
+                            id="propertyTitle"
+                            placeholder="e.g. Luxury 3 Bedroom Apartment"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Location *</label>
+
+                        <input
+                            type="text"
+                            id="propertyLocation"
+                            placeholder="e.g. Karen, Nairobi"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Listing Type *</label>
+
+                        <select id="propertyStatus" required>
+
+                            <option value="For Sale">
+                                For Sale
+                            </option>
+
+                            <option value="For Rent">
+                                For Rent
+                            </option>
+
+                            <option value="For Lease">
+                                For Lease
+                            </option>
+
+                            <option value="Land For Sale">
+                                Land For Sale
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Property Type *</label>
+
+                        <select id="propertyType" required>
+
+                            <option value="Residential">
+                                Residential
+                            </option>
+
+                            <option value="Apartment">
+                                Apartment
+                            </option>
+
+                            <option value="Commercial">
+                                Commercial
+                            </option>
+
+                            <option value="Land">
+                                Land
+                            </option>
+
+                            <option value="Office">
+                                Office
+                            </option>
+
+                            <option value="Warehouse">
+                                Warehouse
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row three">
+
+                    <div class="form-group">
+
+                        <label>Price (KSh) *</label>
+
+                        <input
+                            type="number"
+                            id="propertyPrice"
+                            placeholder="8000000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Bedrooms</label>
+
+                        <input
+                            type="number"
+                            id="propertyBeds"
+                            placeholder="2"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Bathrooms</label>
+
+                        <input
+                            type="number"
+                            id="propertyBaths"
+                            placeholder="2"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Property Size</label>
+
+                    <input
+                        type="text"
+                        id="propertySize"
+                        placeholder="e.g. 1,500 sq ft"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Description *</label>
+
+                    <textarea
+                        id="propertyDescription"
+                        rows="5"
+                        placeholder="Write a detailed description of the property..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- IMAGE UPLOAD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Property Photos *
+                    </label>
+
+                    <label class="upload-area">
+
+                        <input
+                            type="file"
+                            id="propertyImages"
+                            accept="image/*"
+                            multiple
+                        >
+
+                        <span class="upload-icon">
+                            ＋
+                        </span>
+
+                        <strong>
+                            Upload Property Photos
+                        </strong>
+
+                        <small>
+                            You can select multiple images
+                        </small>
+
+                    </label>
+
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                    class="image-preview"
+                    id="imagePreview"
+                ></div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeAdminPanel()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="button button-primary"
+                    >
+                        Save Property →
+                    </button>
+
+                </div>
+
+                <div
+                    class="form-message"
+                    id="propertyMessage"
+                ></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- MANAGE LISTINGS -->
+
+        <div
+            id="managePropertyArea"
+            class="manage-property-area"
+        >
+
+            <div id="adminPropertyList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROPERTY DETAILS MODAL
+========================================================= -->
+
+<div class="modal" id="propertyDetailsModal">
+
+    <div class="property-modal">
+
+        <button
+            class="modal-close"
+            onclick="closePropertyDetails()"
+        >
+            ×
+        </button>
+
+
+        <div
+            class="property-gallery"
+            id="propertyGallery"
+        ></div>
+
+
+        <div class="property-details-content">
+
+            <span
+                class="property-status"
+                id="detailStatus"
+            ></span>
+
+            <h2 id="detailTitle"></h2>
+
+            <p
+                class="detail-location"
+                id="detailLocation"
+            ></p>
+
+            <div
+                class="detail-price"
+                id="detailPrice"
+            ></div>
+
+
+            <div
+                class="detail-features"
+                id="detailFeatures"
+            ></div>
+
+
+            <p
+                class="detail-description"
+                id="detailDescription"
+            ></p>
+
+
+            <div class="detail-actions">
+
+                <a
+                    href="#"
+                    target="_blank"
+                    class="button button-primary"
+                    id="detailWhatsApp"
+                >
+                    WhatsApp Enquiry
+                    <span>→</span>
+                </a>
+
+                <a
+                    href="tel:+254721557592"
+                    class="button button-outline dark-outline"
+                >
+                    Call Agent
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MOBILE WHATSAPP
+========================================================= -->
+
+<a
+    href="https://wa.me/254721557592"
+    target="_blank"
+    class="floating-whatsapp"
+>
+    <span>◉</span>
+    <small>WhatsApp</small>
+</a>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
