@@ -8,13 +8,13 @@
    GLOBAL VARIABLES
 ========================================================= */
 
-const STORAGE_KEY = "alumariah_realtors_properties";
+
 
 let properties = [];
 
-let editingPropertyId = null;
 
-let selectedImages = [];
+
+
 
 let currentSearchMode = "all";
 
@@ -23,15 +23,15 @@ let currentSearchMode = "all";
    START WEBSITE
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    loadProperties();
+    await loadProperties();
 
     renderProperties();
 
     setupNavigation();
 
-    setupImageUpload();
+
 
     setupSearchTabs();
 
@@ -44,66 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
    PROPERTY STORAGE
 ========================================================= */
 
-function loadProperties() {
-
-    const saved =
-        localStorage.getItem(STORAGE_KEY);
-
-    if (saved) {
-
-        try {
-
-            properties =
-                JSON.parse(saved);
-
-        } catch (error) {
-
-            properties = [];
-
-        }
-
-    } else {
-
-        properties = [];
-
-    }
-
-}
-
-
-function saveProperties() {
-
+async function loadProperties() {
     try {
-
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(properties)
-        );
-
+        properties = await PropertyStore.list();
     } catch (error) {
-
-        alert(
-            "The browser storage is full. Try using smaller images or fewer photos."
-        );
-
+        properties = [];
+        document.querySelector('#emptyProperties h3').textContent = 'Listings are temporarily unavailable.';
+        document.querySelector('#emptyProperties p').textContent = 'Please contact us for current availability.';
+        console.error('Unable to load listings:', error.message);
     }
-
 }
-
-
-/* =========================================================
-   PROPERTY ID
-========================================================= */
-
-function createPropertyId() {
-
-    return Date.now().toString()
-        + Math.random()
-            .toString(36)
-            .substring(2, 8);
-
-}
-
 
 /* =========================================================
    FORMAT PRICE
@@ -127,17 +77,8 @@ function formatPrice(price) {
 ========================================================= */
 
 function whatsappLink(property) {
-
-    const message =
-        `Hello ALUMARIAH REALTORS,%0A%0A` +
-        `I am interested in:%0A` +
-        `${property.title}%0A` +
-        `Location: ${property.location}%0A` +
-        `Price: ${formatPrice(property.price)}%0A%0A` +
-        `Please provide more information.`;
-
-    return `https://wa.me/254756112632?text=${message}`;
-
+    const message = `Hello ALUMARIAH REALTORS, I am interested in: ${property.title}. Location: ${property.location}. Price: ${formatPrice(property.price)}. Please provide more information.`;
+    return `https://wa.me/254721557592?text=${encodeURIComponent(message)}`;
 }
 
 
@@ -201,7 +142,7 @@ function renderProperties(list = properties) {
                     image
                     ?
                     `<img
-                        src="${image}"
+                        src="${escapeHTML(image)}"
                         alt="${escapeHTML(property.title)}"
                     >`
                     :
@@ -245,14 +186,14 @@ function renderProperties(list = properties) {
                     ${
                         property.beds
                         ?
-                        `<span>🛏 ${property.beds} Beds</span>`
+                        `<span>🛏 ${Number(property.beds) || 0} Beds</span>`
                         : ""
                     }
 
                     ${
                         property.baths
                         ?
-                        `<span>♨ ${property.baths} Baths</span>`
+                        `<span>♨ ${Number(property.baths) || 0} Baths</span>`
                         : ""
                     }
 
@@ -321,865 +262,6 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   ADMIN PANEL
-========================================================= */
-
-function openAdminPanel() {
-
-    const modal =
-        document.getElementById(
-            "adminModal"
-        );
-
-    modal.classList.add("show");
-
-    document.body.style.overflow =
-        "hidden";
-
-    showAddProperty();
-
-}
-
-
-function closeAdminPanel() {
-
-    const modal =
-        document.getElementById(
-            "adminModal"
-        );
-
-    modal.classList.remove("show");
-
-    document.body.style.overflow =
-        "";
-
-    resetPropertyForm();
-
-}
-
-
-/* =========================================================
-   ADMIN TABS
-========================================================= */
-
-function showAddProperty() {
-
-    document.getElementById(
-        "addPropertyArea"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "managePropertyArea"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "addTab"
-    ).classList.add("active");
-
-
-    document.getElementById(
-        "manageTab"
-    ).classList.remove("active");
-
-}
-
-
-function showManageProperties() {
-
-    document.getElementById(
-        "addPropertyArea"
-    ).style.display = "none";
-
-
-    document.getElementById(
-        "managePropertyArea"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "addTab"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "manageTab"
-    ).classList.add("active");
-
-
-    renderAdminProperties();
-
-}
-
-
-/* =========================================================
-   IMAGE UPLOAD
-========================================================= */
-
-function setupImageUpload() {
-
-    const input =
-        document.getElementById(
-            "propertyImages"
-        );
-
-
-    if (!input) return;
-
-
-    input.addEventListener(
-        "change",
-        event => {
-
-            selectedImages =
-                Array.from(
-                    event.target.files
-                );
-
-            showImagePreviews();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
-
-function showImagePreviews() {
-
-    const preview =
-        document.getElementById(
-            "imagePreview"
-        );
-
-
-    preview.innerHTML = "";
-
-
-    selectedImages.forEach(file => {
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload = event => {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-            div.className =
-                "preview-image";
-
-
-            div.innerHTML = `
-
-                <img
-                    src="${event.target.result}"
-                    alt="Property preview"
-                >
-
-            `;
-
-
-            preview.appendChild(div);
-
-        };
-
-
-        reader.readAsDataURL(file);
-
-    });
-
-}
-
-
-/* =========================================================
-   COMPRESS IMAGE
-========================================================= */
-
-function compressImage(file) {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload = event => {
-
-                const img =
-                    new Image();
-
-
-                img.onload = () => {
-
-                    const maxWidth = 1400;
-
-                    let width =
-                        img.width;
-
-                    let height =
-                        img.height;
-
-
-                    if (width > maxWidth) {
-
-                        height =
-                            height *
-                            (maxWidth / width);
-
-                        width =
-                            maxWidth;
-
-                    }
-
-
-                    const canvas =
-                        document.createElement(
-                            "canvas"
-                        );
-
-
-                    canvas.width =
-                        width;
-
-                    canvas.height =
-                        height;
-
-
-                    const ctx =
-                        canvas.getContext(
-                            "2d"
-                        );
-
-
-                    ctx.drawImage(
-                        img,
-                        0,
-                        0,
-                        width,
-                        height
-                    );
-
-
-                    const compressed =
-                        canvas.toDataURL(
-                            "image/jpeg",
-                            .78
-                        );
-
-
-                    resolve(compressed);
-
-                };
-
-
-                img.onerror =
-                    reject;
-
-                img.src =
-                    event.target.result;
-
-            };
-
-
-            reader.onerror =
-                reject;
-
-            reader.readAsDataURL(file);
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   PROPERTY FORM
-========================================================= */
-
-document.addEventListener(
-    "submit",
-    async event => {
-
-        if (
-            event.target.id !==
-            "propertyForm"
-        ) return;
-
-
-        event.preventDefault();
-
-
-        const title =
-            document.getElementById(
-                "propertyTitle"
-            ).value.trim();
-
-
-        const location =
-            document.getElementById(
-                "propertyLocation"
-            ).value.trim();
-
-
-        const status =
-            document.getElementById(
-                "propertyStatus"
-            ).value;
-
-
-        const type =
-            document.getElementById(
-                "propertyType"
-            ).value;
-
-
-        const price =
-            document.getElementById(
-                "propertyPrice"
-            ).value;
-
-
-        const beds =
-            document.getElementById(
-                "propertyBeds"
-            ).value;
-
-
-        const baths =
-            document.getElementById(
-                "propertyBaths"
-            ).value;
-
-
-        const size =
-            document.getElementById(
-                "propertySize"
-            ).value.trim();
-
-
-        const description =
-            document.getElementById(
-                "propertyDescription"
-            ).value.trim();
-
-
-        const message =
-            document.getElementById(
-                "propertyMessage"
-            );
-
-
-        if (
-            !title ||
-            !location ||
-            !price ||
-            !description
-        ) {
-
-            message.textContent =
-                "Please complete all required fields.";
-
-            return;
-
-        }
-
-
-        if (
-            !editingPropertyId &&
-            !selectedImages.length
-        ) {
-
-            message.textContent =
-                "Please upload at least one property photo.";
-
-            return;
-
-        }
-
-
-        message.textContent =
-            "Saving property...";
-
-
-        let images = [];
-
-
-        try {
-
-            if (selectedImages.length) {
-
-                for (
-                    const file
-                    of selectedImages
-                ) {
-
-                    const compressed =
-                        await compressImage(
-                            file
-                        );
-
-                    images.push(
-                        compressed
-                    );
-
-                }
-
-            }
-
-
-            if (editingPropertyId) {
-
-                const index =
-                    properties.findIndex(
-                        p =>
-                            p.id ===
-                            editingPropertyId
-                    );
-
-
-                if (index !== -1) {
-
-                    const existing =
-                        properties[index];
-
-
-                    properties[index] = {
-
-                        ...existing,
-
-                        title,
-                        location,
-                        status,
-                        type,
-                        price:
-                            Number(price),
-                        beds:
-                            Number(beds) || 0,
-                        baths:
-                            Number(baths) || 0,
-                        size,
-                        description,
-
-                        images:
-                            images.length
-                            ?
-                            images
-                            :
-                            existing.images
-
-                    };
-
-                }
-
-            } else {
-
-                const newProperty = {
-
-                    id:
-                        createPropertyId(),
-
-                    title,
-
-                    location,
-
-                    status,
-
-                    type,
-
-                    price:
-                        Number(price),
-
-                    beds:
-                        Number(beds) || 0,
-
-                    baths:
-                        Number(baths) || 0,
-
-                    size,
-
-                    description,
-
-                    images,
-
-                    createdAt:
-                        new Date()
-                            .toISOString()
-
-                };
-
-
-                properties.unshift(
-                    newProperty
-                );
-
-            }
-
-
-            saveProperties();
-
-            renderProperties();
-
-            renderAdminProperties();
-
-
-            message.textContent =
-                "Property saved successfully!";
-
-
-            setTimeout(
-                () => {
-
-                    resetPropertyForm();
-
-                    showManageProperties();
-
-                },
-                900
-            );
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            message.textContent =
-                "Something went wrong while saving the property.";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   RESET FORM
-========================================================= */
-
-function resetPropertyForm() {
-
-    const form =
-        document.getElementById(
-            "propertyForm"
-        );
-
-
-    if (form) {
-
-        form.reset();
-
-    }
-
-
-    selectedImages = [];
-
-    editingPropertyId = null;
-
-
-    const preview =
-        document.getElementById(
-            "imagePreview"
-        );
-
-
-    if (preview) {
-
-        preview.innerHTML = "";
-
-    }
-
-
-    const message =
-        document.getElementById(
-            "propertyMessage"
-        );
-
-
-    if (message) {
-
-        message.textContent = "";
-
-    }
-
-
-    const button =
-        document.querySelector(
-            "#propertyForm .button-primary"
-        );
-
-
-    if (button) {
-
-        button.innerHTML =
-            "Save Property →";
-
-    }
-
-}
-
-
-/* =========================================================
-   ADMIN PROPERTY LIST
-========================================================= */
-
-function renderAdminProperties() {
-
-    const container =
-        document.getElementById(
-            "adminPropertyList"
-        );
-
-
-    if (!properties.length) {
-
-        container.innerHTML = `
-
-            <div class="no-admin-listings">
-
-                <strong>
-                    No properties have been added yet.
-                </strong>
-
-                <p>
-                    Go to "Add Property" to create your first listing.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    properties.forEach(property => {
-
-        const item =
-            document.createElement(
-                "div"
-            );
-
-
-        item.className =
-            "admin-list-item";
-
-
-        const image =
-            property.images &&
-            property.images.length
-                ? property.images[0]
-                : "";
-
-
-        item.innerHTML = `
-
-            <div class="admin-list-image">
-
-                ${
-                    image
-                    ?
-                    `<img
-                        src="${image}"
-                        alt=""
-                    >`
-                    :
-                    ""
-                }
-
-            </div>
-
-
-            <div class="admin-list-info">
-
-                <strong>
-                    ${escapeHTML(property.title)}
-                </strong>
-
-                <span>
-                    ${escapeHTML(property.location)}
-                    •
-                    ${formatPrice(property.price)}
-                </span>
-
-            </div>
-
-
-            <div class="admin-list-buttons">
-
-                <button
-                    class="edit-listing"
-                    onclick="editProperty('${property.id}')"
-                >
-                    Edit
-                </button>
-
-                <button
-                    class="delete-listing"
-                    onclick="deleteProperty('${property.id}')"
-                >
-                    Delete
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(item);
-
-    });
-
-}
-
-
-/* =========================================================
-   EDIT PROPERTY
-========================================================= */
-
-function editProperty(id) {
-
-    const property =
-        properties.find(
-            p => p.id === id
-        );
-
-
-    if (!property) return;
-
-
-    editingPropertyId =
-        id;
-
-
-    document.getElementById(
-        "propertyTitle"
-    ).value =
-        property.title;
-
-
-    document.getElementById(
-        "propertyLocation"
-    ).value =
-        property.location;
-
-
-    document.getElementById(
-        "propertyStatus"
-    ).value =
-        property.status;
-
-
-    document.getElementById(
-        "propertyType"
-    ).value =
-        property.type;
-
-
-    document.getElementById(
-        "propertyPrice"
-    ).value =
-        property.price;
-
-
-    document.getElementById(
-        "propertyBeds"
-    ).value =
-        property.beds;
-
-
-    document.getElementById(
-        "propertyBaths"
-    ).value =
-        property.baths;
-
-
-    document.getElementById(
-        "propertySize"
-    ).value =
-        property.size || "";
-
-
-    document.getElementById(
-        "propertyDescription"
-    ).value =
-        property.description;
-
-
-    selectedImages = [];
-
-
-    document.getElementById(
-        "imagePreview"
-    ).innerHTML = "";
-
-
-    const button =
-        document.querySelector(
-            "#propertyForm .button-primary"
-        );
-
-
-    button.innerHTML =
-        "Update Property →";
-
-
-    showAddProperty();
-
-}
-
-
-/* =========================================================
-   DELETE PROPERTY
-========================================================= */
-
-function deleteProperty(id) {
-
-    const property =
-        properties.find(
-            p => p.id === id
-        );
-
-
-    if (!property) return;
-
-
-    const confirmed =
-        confirm(
-            `Delete "${property.title}"?`
-        );
-
-
-    if (!confirmed) return;
-
-
-    properties =
-        properties.filter(
-            p => p.id !== id
-        );
-
-
-    saveProperties();
-
-    renderProperties();
-
-    renderAdminProperties();
-
-}
-
-
-/* =========================================================
    PROPERTY DETAILS
 ========================================================= */
 
@@ -1238,7 +320,7 @@ function openPropertyDetails(id) {
     if (property.beds) {
 
         features.innerHTML +=
-            `<span>🛏 ${property.beds} Bedrooms</span>`;
+            `<span>🛏 ${Number(property.beds) || 0} Bedrooms</span>`;
 
     }
 
@@ -1246,7 +328,7 @@ function openPropertyDetails(id) {
     if (property.baths) {
 
         features.innerHTML +=
-            `<span>♨ ${property.baths} Bathrooms</span>`;
+            `<span>♨ ${Number(property.baths) || 0} Bathrooms</span>`;
 
     }
 
@@ -1336,7 +418,7 @@ function renderPropertyGallery(property) {
 
             <img
                 id="galleryMainImage"
-                src="${images[0]}"
+                src="${escapeHTML(images[0])}"
                 alt="${escapeHTML(property.title)}"
             >
 
@@ -1356,13 +438,13 @@ function renderPropertyGallery(property) {
                                     : ""
                             }"
                             onclick="changeGalleryImage(
-                                '${image}',
+                                this.querySelector('img').src,
                                 this
                             )"
                         >
 
                             <img
-                                src="${image}"
+                                src="${escapeHTML(image)}"
                                 alt=""
                             >
 
@@ -1731,9 +813,7 @@ function setupContactForm() {
                 `${message}`;
 
 
-            const url =
-                `https://wa.me/254721557592?text=${whatsappMessage}`;
-
+            const url = "https://wa.me/254721557592?text=" + encodeURIComponent(`Hello ALUMARIAH REALTORS,\nMy name is ${name}.\nPhone: ${phone}\nI need help with: ${need}\n${message}`);
 
             window.open(
                 url,
@@ -1760,26 +840,13 @@ window.addEventListener(
     "click",
     event => {
 
-        const adminModal =
-            document.getElementById(
-                "adminModal"
-            );
-
-
         const detailsModal =
             document.getElementById(
                 "propertyDetailsModal"
             );
 
 
-        if (
-            event.target ===
-            adminModal
-        ) {
 
-            closeAdminPanel();
-
-        }
 
 
         if (

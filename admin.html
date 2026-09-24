@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Admin | Alumariah Realtors</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="admin.css"></head>
+<body class="admin-page"><header class="admin-header"><a href="index.html">ALUMARIAH REALTORS</a><span>Property administration</span><button id="signOut" hidden>Sign out</button></header>
+<main class="admin-shell"><p id="adminStatus" role="status" aria-live="polite"></p>
+<section id="loginPanel" class="login-panel"><h1>Admin sign in</h1><p>Use your authorised account to manage property listings.</p>
+<form id="loginForm"><label for="adminEmail">Email address</label><input id="adminEmail" type="email" autocomplete="username" required>
+<label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" required minlength="8">
+<button class="button button-primary" type="submit">Sign in</button></form></section>
+<section id="adminWorkspace" hidden><p id="accountLabel"></p><p>Saved listings are published to the website. Archive removes a listing from public view.</p>
+<button id="refreshListings" type="button">Refresh listings</button><div class="modal" id="adminModal">
+
+    <div class="admin-modal">
+
+        
+
+
+        <div class="modal-header">
+
+            <div class="section-label">
+                ADMIN / AGENT
+            </div>
+
+            <h2>
+                Property
+                <span>Manager</span>
+            </h2>
+
+            <p>
+                Publish and manage the listings visitors see on your website.
+            </p>
+
+        </div>
+
+
+        <div class="admin-tabs">
+
+            <button
+                class="admin-tab active"
+                id="addTab"
+                onclick="resetPropertyForm(); showAddProperty()"
+            >
+                Add Property
+            </button>
+
+            <button
+                class="admin-tab"
+                id="manageTab"
+                onclick="showManageProperties()"
+            >
+                Manage Listings
+            </button>
+
+        </div>
+
+
+        <!-- ADD PROPERTY -->
+
+        <div id="addPropertyArea">
+
+            <form id="propertyForm">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Property Title *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="propertyTitle"
+                            placeholder="e.g. Luxury 3 Bedroom Apartment"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Location *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="propertyLocation"
+                            placeholder="e.g. Karen, Nairobi"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Listing Type *
+                        </label>
+
+                        <select
+                            id="propertyStatus"
+                            required
+                        >
+
+                            <option value="For Sale">
+                                For Sale
+                            </option>
+
+                            <option value="For Rent">
+                                For Rent
+                            </option>
+
+                            <option value="For Lease">
+                                For Lease
+                            </option>
+
+                            <option value="Land For Sale">
+                                Land For Sale
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Property Type *
+                        </label>
+
+                        <select
+                            id="propertyType"
+                            required
+                        >
+
+                            <option value="Residential">
+                                Residential
+                            </option>
+
+                            <option value="Apartment">
+                                Apartment
+                            </option>
+
+                            <option value="Commercial">
+                                Commercial
+                            </option>
+
+                            <option value="Land">
+                                Land
+                            </option>
+
+                            <option value="Office">
+                                Office
+                            </option>
+
+                            <option value="Warehouse">
+                                Warehouse
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row three">
+
+                    <div class="form-group">
+
+                        <label>
+                            Price (KSh) *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="propertyPrice"
+                            placeholder="8000000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Bedrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            id="propertyBeds"
+                            placeholder="2"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Bathrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            id="propertyBaths"
+                            placeholder="2"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Property Size
+                    </label>
+
+                    <input
+                        type="text"
+                        id="propertySize"
+                        placeholder="e.g. 1,500 sq ft"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Description *
+                    </label>
+
+                    <textarea
+                        id="propertyDescription"
+                        rows="5"
+                        placeholder="Write a detailed description of the property..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- IMAGE UPLOAD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Property Photos *
+                    </label>
+
+                    <label class="upload-area">
+
+                        <input
+                            type="file"
+                            id="propertyImages"
+                            accept="image/*"
+                            multiple
+                        >
+
+                        <span class="upload-icon">
+                            ＋
+                        </span>
+
+                        <strong>
+                            Upload Property Photos
+                        </strong>
+
+                        <small>
+                            You can select multiple images
+                        </small>
+
+                    </label>
+
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                    class="image-preview"
+                    id="imagePreview"
+                ></div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        onclick="closeAdminPanel()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="button button-primary"
+                    >
+                        Publish Property →
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="form-message"
+                    id="propertyMessage" role="status" aria-live="polite"
+                ></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- MANAGE LISTINGS -->
+
+        <div
+            id="managePropertyArea"
+            class="manage-property-area"
+        >
+
+            <div id="adminPropertyList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="property-store.js"></script>
+<script src="admin.js"></script></body></html>
